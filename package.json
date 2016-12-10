@@ -1,0 +1,16 @@
+{
+  "name": "project3",
+  "version": "1.0.0",
+  "engines":  {
+    "node"  : "7.1.0",
+    "npm": "3.10.x"
+  },
+  "description": "igme 330 project 3",
+  "main": "./src/server.js",
+  "scripts": {
+    "start": "node ./src/server.js",
+    "test": "echo 'complete'"
+  },
+  "author": "Michael Lynch",
+  "license": "UNLICENSED"
+}
