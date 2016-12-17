@@ -1,8 +1,8 @@
 {
   "name": "project3",
   "version": "1.0.0",
-  "engines":  {
-    "node"  : "7.1.0",
+  "engines": {
+    "node": "7.1.0",
     "npm": "3.10.x"
   },
   "description": "igme 330 project 3",
@@ -12,5 +12,9 @@
     "test": "echo 'complete'"
   },
   "author": "Michael Lynch",
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "yelp": "^1.0.2"
+  }
 }
