@@ -4,58 +4,109 @@
     <meta content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
     <!-- Google Font Bree Serif-->
-    <link href="https://fonts.googleapis.om/css?family=Bree+Serif" rel="stylesheet">
+    <!--<link href="https://fonts.googleapis.om/css?family=Bree+Serif" rel="stylesheet"/>-->
 
-    <script src="js/main.js"></script>
-    
     <link rel="icon" href="images/favicon.ico">
     <title>Find your Food!</title>
 
     <style>
+        @import url('https://fonts.googleapis.com/css?family=Bree+Serif');
         body {
             background-color: #73C6B6;
             font-family: 'Bree Serif', serif;
             font-size: 24px;
         }
-        
+
         .title {
             text-align: center;
         }
-        
+
         h1 {
             font-size: 56px;
         }
 
     </style>
 
+    <script>
+        "use strict";
+        var yelpData;
+
+
+        $(document).ready(function () {
+            console.log("ready!");
+            $("#search").submit(function (e) {
+                var action = $("#search").attr("action");
+
+                var term = encodeURIComponent("food");
+                var location = encodeURIComponent($("#zip").val());
+
+                var data = "term=" + term + "&location=" + location;
+
+                $.ajax({
+                    cache: false,
+                    type: "get",
+                    url: action,
+                    data: data,
+                    dataType: "json",
+                    success: function (result,status,xhr) {
+                        yelpData = result;
+
+                        getRandomFood(yelpData.businesses);
+                    },
+
+                    error:function (error, status, xhr) {
+                        var resultText = JSON.stringify(error);
+                        $("#result").text(resultText);
+                    }
+                });
+                e.preventDefault();
+                return false;
+            });
+        });
+
+        function getRandomFood(data){
+            //console.dir(data);
+            var index = Math.floor(Math.random() * data.length);
+            var info = data[index];
+
+            
+        }
+
+    </script>
+
 </head>
 
 <body>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12 title">
-                <h1>Find your Food!</h1>
-            </div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 title">
+            <h1>Find your Food!</h1>
         </div>
-        <div class="row">
-            <div class="col-md-12"></div>
-        </div>
-        <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-8 title">
+    </div>
+    <div class="row">
+        <div class="col-md-12"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8 title">
+            <form id="search" action="/search" method="get">
                 <div class="form-group">
                     <p>Not sure what to get for lunch? Let us choose for you!</p>
                     <label for="zip">Enter your Zip Code to find food:</label><br>
-                    <input type="text" name="zip" id="zip" max-length="5" placeholder="Enter your zip">
-                    <button id="submitButton" type="button" class="btn btn-default">Submit</button>
+                    <input id="zip" type="text" name="location" placeholder="Enter your zip code">
+                    <button id="submitButton" type="submit" class="btn btn-default">Submit</button>
                 </div>
-            </div>
-            <div class="col-md-2"></div>
+            </form>
         </div>
+        <div class="col-md-2"></div>
     </div>
+</div>
 </body>
 </html>
