@@ -8,7 +8,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/bootstrap.css">
 
     <!-- Google Font Bree Serif-->
     <!--<link href="https://fonts.googleapis.om/css?family=Bree+Serif" rel="stylesheet"/>-->
@@ -27,9 +27,35 @@
         .title {
             text-align: center;
         }
+        
+        .results{
+            display: none;
+            border: 4px solid #7383C6;
+            border-radius: 3px;
+            background-color: #73ADC6;
+        }
+        
+        #name{
+            font-size: 64px;
+            font-weight: bold;
+        }
 
         h1 {
             font-size: 56px;
+        }
+        
+        #map{
+            width: auto;
+            right: 0;
+            height: 450px;
+            background-color: gray;
+            margin-top:10px;
+            margin-bottom: 10px;
+            
+        }
+
+        #url{
+            font-size: 16px;
         }
 
     </style>
@@ -37,7 +63,8 @@
     <script>
         "use strict";
         var yelpData;
-
+        var map;
+        var markers = new Array();
 
         $(document).ready(function () {
             console.log("ready!");
@@ -75,12 +102,54 @@
             //console.dir(data);
             var index = Math.floor(Math.random() * data.length);
             var info = data[index];
-
             
+            $('#name').text(info.name);
+            $('#phone').text(info.phone);
+            
+            var fullAddr;
+            for(var i = 0; i < info.location.display_address.length; i++){
+                if(info.location.display_address[i]){
+                    fullAddr += info.location.display_address[i] + " ";
+                }
+            }
+            $('#address').text(fullAddr);
+            $('#url').text(info.url);
+
+            var latlong = {lat: info.location.coordinate.latitude, lng: info.location.coordinate.longitude};
+
+            $('#results').show();
+            google.maps.event.trigger(map, 'resize');
+
+            clearMarkers();
+
+            var marker = new google.maps.Marker({
+                position: latlong,
+                map: map,
+                title: info.name
+            });
+
+            markers.push(marker);
+            map.panTo(marker.position);
+
+        }
+        
+        function initMap(){
+            var initLatLong = {lat: 43.16, lng: -77.61};
+            
+            map = new google.maps.Map(document.getElementById('map'),{
+                zoom: 12,
+                center: initLatLong
+            });
+        }
+
+        function clearMarkers() {
+            for(var i = 0; i < markers.length; i++){
+                markers[i].setMap(null);
+            }
         }
 
     </script>
-
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDowp7jl9n0Lyfj2nP5fqnunbsVShx6-A&callback=initMap"></script>
 </head>
 
 <body>
@@ -107,6 +176,24 @@
         </div>
         <div class="col-md-2"></div>
     </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div id="results" class="col-md-6 results">
+            <div class="row">
+                <div class="col-md-4">
+                    <div id='name'>Title</div>
+                    <div id='phone'>8888888888</div>
+                    <div id='address'>123 Sesame St Rochester, NY </div>
+                    <div id='url'>hot.com</div>
+                </div>
+                <div class="col-md-8">
+                    <div id="map"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
 </div>
+
 </body>
 </html>
