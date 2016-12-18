@@ -102,12 +102,12 @@
             //console.dir(data);
             var index = Math.floor(Math.random() * data.length);
             var info = data[index];
-            
+
             $('#name').text(info.name);
             $('#phone').text(info.phone);
-            
+
             var fullAddr;
-            for(var i = 0; i < info.location.display_address.length; i++){
+            for(var i = 1; i < info.location.display_address.length; i++){
                 if(info.location.display_address[i]){
                     fullAddr += info.location.display_address[i] + " ";
                 }
@@ -132,10 +132,10 @@
             map.panTo(marker.position);
 
         }
-        
+
         function initMap(){
             var initLatLong = {lat: 43.16, lng: -77.61};
-            
+
             map = new google.maps.Map(document.getElementById('map'),{
                 zoom: 12,
                 center: initLatLong
