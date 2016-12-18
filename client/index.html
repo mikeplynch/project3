@@ -1,76 +1,61 @@
 <html lang="en">
-    <head>
-        <meta content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- Bootstrap -->
-        <link href="../node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
-        <link href="../node_modules/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet">
+<head>
+    <meta content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Google Font Bree Serif-->
+    <link href="https://fonts.googleapis.om/css?family=Bree+Serif" rel="stylesheet">
+
+    <script src="js/main.js"></script>
+    
+    <link rel="icon" href="images/favicon.ico">
+    <title>Find your Food!</title>
+
+    <style>
+        body {
+            background-color: #73C6B6;
+            font-family: 'Bree Serif', serif;
+            font-size: 24px;
+        }
         
-        <!-- Google Font Bree Serif-->
-        <link href="https://fonts.googleapis.com/css?family=Bree+Serif" rel="stylesheet">
+        .title {
+            text-align: center;
+        }
         
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        
-        <link rel="icon" href="images/favicon.ico">
-        <title>Find your Food!</title>
-        
-        <style>
-            body {
-                background-color: #73C6B6;
-                font-family: 'Bree Serif', serif;
-                font-size: 24px;
-            }
-            
-            .title {
-                text-align: center;
-            }
-            
-            h1 {
-                font-size: 56px;
-            }
-            
-            .group-input {
-                position: relative;
-                
-                input{
-                    width: 100%;
-                    padding: 15px;
-                }
-                button {
-                    position: absolute;
-                    right: 10px;
-                    top: 7px;
-                }
-            }
-            
-        </style>
-        
-    </head>
-    <body>
-        <div class="container-fluid">
-            <div class="row">                
-                <div class="col-md-12 title">
-                    <h1>Find your Food!</h1>
-                </div>
-            </div>
-            <div class="row"><div class="col-md-12"></div></div>
-            <div class="row">
-                <div class="col-md-2"></div>
-                <div class="col-md-8 title">
-                    <form action="/search" method="get" id="searchForm">
-                        <div class="form-group">
-                            <p>Not sure what to get for lunch? Let us choose for you!</p>
-                            <label for="zip">Enter your Zip Code to find food:</label><br>
-                            <input type="number" name="zip" id="zip" placeholder="Enter your zip"/>
-                            <button type="submit" formtarget="_parent" class="btn btn-default">Submit</button>
-                        </div>
-                    </form>
-                </div>
-                <div class="col-md-2"></div>
+        h1 {
+            font-size: 56px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 title">
+                <h1>Find your Food!</h1>
             </div>
         </div>
-        
-        <script
-    </body>
+        <div class="row">
+            <div class="col-md-12"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8 title">
+                <div class="form-group">
+                    <p>Not sure what to get for lunch? Let us choose for you!</p>
+                    <label for="zip">Enter your Zip Code to find food:</label><br>
+                    <input type="text" name="zip" id="zip" max-length="5" placeholder="Enter your zip">
+                    <button id="submitButton" type="button" class="btn btn-default">Submit</button>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+</body>
 </html>
